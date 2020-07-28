@@ -1,7 +1,0 @@
-/target
-.idea
-.sbtserver
-project/project
-project/target
-/logs
-deploy
