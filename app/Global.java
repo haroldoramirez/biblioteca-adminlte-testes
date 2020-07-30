@@ -1,4 +1,3 @@
-import controllers.ApiRDStationController;
 import controllers.LogController;
 import play.Application;
 import play.GlobalSettings;
@@ -14,9 +13,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -26,8 +22,6 @@ import static play.mvc.Results.notFound;
 public class Global extends GlobalSettings {
 
     static private final LogController logController = new LogController();
-
-    static private final ApiRDStationController apiRDStationController = new ApiRDStationController();
 
     @Override
     public void onStart(Application app) {
@@ -57,21 +51,6 @@ public class Global extends GlobalSettings {
 
     @Override
     public void beforeStart(Application app) {
-
-        //Apenas para servidor de producao
-        //Thread que executa a API RDStation - 540 = 9Minutos
-        Runnable runnable = () -> {
-            // tarefa para ser executada em um determinado tempo
-            System.out.println("Thread - Oportunidades RDStation");
-            apiRDStationController.listarOportunidadesRDStation();
-
-        };
-
-        //Comentar em ambiente de teste
-        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-
-        //Comentar em ambiente de teste
-        service.scheduleAtFixedRate(runnable, 0, 540, TimeUnit.SECONDS);
 
         //Criar os arquivos com textos e seus respectivos diretorios
         try {

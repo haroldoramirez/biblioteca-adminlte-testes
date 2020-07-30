@@ -6,12 +6,9 @@ angular
              'angular-loading-bar',
              'toastr',
              'ngDialog',
-             'youtube-embed', 
              'angular-carousel',
-             '720kb.socialshare',
              'ngFileUpload',
              'ngAnimate',
-             'ngtweet',
              'angular-google-analytics',
              'ncy-angular-breadcrumb',
              'ngMeta'

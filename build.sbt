@@ -29,14 +29,17 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
+  filters,
   "org.postgresql" % "postgresql" % "9.4.1211",
   "com.typesafe.play" %% "play-mailer" % "4.0.0",
   "org.julienrf" %% "play-jsmessages" % "2.0.0",
   "commons-io" % "commons-io" % "2.4",
   "commons-validator" % "commons-validator" % "1.5.1",
-  "org.mindrot" % "jbcrypt" % "0.3m",
+  "org.mindrot" % "jbcrypt" % "0.4",
   "eu.bitwalker" % "UserAgentUtils" % "1.20",
-  "it.innove" % "play2-pdf" % "1.4.0"
+  "it.innove" % "play2-pdf" % "1.4.0",
+  "org.apache.poi" % "poi" % "4.1.2",
+  "com.google.code.gson" % "gson" % "2.8.6"
 )
 
 // Play provides two styles of routers, one expects its actions to be injected, the
