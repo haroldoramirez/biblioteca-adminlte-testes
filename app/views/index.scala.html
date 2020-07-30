@@ -21,8 +21,6 @@
     <meta property="og:type" content="{{ngMeta['og:type']}}" />
     <meta property="og:locale" content="{{ngMeta['og:locale']}}" />
     <meta name="author" content="{{ngMeta['author']}}" />
-        @*Carregar a Pagina*@
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/cloak.css")">
         @*Icones da aplicacao*@
     <link rel="icon" sizes="192x192" href="@routes.Assets.versioned("images/cibiogasicon.png")">
     <link rel="apple-touch-icon-precomposed" href="@routes.Assets.versioned("images/cibiogasicon.png")">
@@ -45,15 +43,14 @@
         @*Angular Carousel*@
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("bower_components/angular-carousel/angular-carousel.min.css")">
         @*Dependencias do Material Design Icons e Fonts*@
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/material/fonts.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/material/icons.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/material/fonts.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/material/icons.css")">
         @*Estilos do CIBIogas*@
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/templatemdl.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/efeitos.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/cartao.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/cartao-home.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/evento.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/carousel.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/templatemdl.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/cartao.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/cartao-home.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/evento.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/frontend/carousel.css")">
 </head>
 <body twitter-widget-initialize ng-cloak>
 <div class="cib-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -203,9 +200,9 @@
     @*Recebe as mensagens atraves do idioma do navegador*@
 <script src="@routes.Application.jsMessages()" type="text/javascript"></script>
     @*Drawer Material Desing Lite*@
-<script src="@routes.Assets.versioned("javascripts/drawer.js")" type="text/javascript"></script>
+<script src="@routes.Assets.versioned("javascripts/frontend/drawer.js")" type="text/javascript"></script>
     @*Analytics*@
-<script src="@routes.Assets.versioned("javascripts/analytics.js")" type="text/javascript"></script>
+<script src="@routes.Assets.versioned("javascripts/frontend/analytics.js")" type="text/javascript"></script>
     @*Jquery para o lightbox*@
 <script src="@routes.Assets.versioned("bower_components/jquery/dist/jquery.min.js")" type="text/javascript"></script>
     @*Angular*@
