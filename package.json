@@ -2,7 +2,7 @@
   "title": "Biblioteca Digital",
   "name": "biblioteca",
   "description": "Modern application - AngularJS + Bootstrap + Bower + Playframework",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "author": {
     "name": "Haroldo Ramirez da Nobrega",
     "email": "haroldoramirez@gmail.com"
