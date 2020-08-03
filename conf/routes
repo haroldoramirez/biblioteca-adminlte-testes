@@ -69,33 +69,6 @@ GET	    /admin/avaliacao/:id/reprovar		                            controllers.A
 POST    /avaliacao                                                      controllers.AvaliacaoController.inserir()
 GET     /admin/adicionais/avaliacao/pdf/:titulo                         controllers.AvaliacaoController.pdfAdmin(titulo:String)
 
-# Adicionais Documentacao
-GET     /documentacao/inicio                                            controllers.DocumentacaoController.inicio()
-GET     /documentacao/sobre                                             controllers.DocumentacaoController.sobre()
-GET     /documentacao/api                                               controllers.DocumentacaoController.api()
-GET     /documentacao/manual                                            controllers.DocumentacaoController.manual()
-GET     /documentacao/dicionario/pais                                   controllers.DocumentacaoController.pais()
-GET     /documentacao/dicionario/categoria                              controllers.DocumentacaoController.categoria()
-GET     /documentacao/dicionario/idioma                                 controllers.DocumentacaoController.idioma()
-GET     /documentacao/dicionario/album                                  controllers.DocumentacaoController.album()
-GET     /documentacao/dicionario/foto                                   controllers.DocumentacaoController.foto()
-GET     /documentacao/dicionario/artigo                                 controllers.DocumentacaoController.artigo()
-GET     /documentacao/dicionario/avaliacao                              controllers.DocumentacaoController.avaliacao()
-GET     /documentacao/dicionario/contato                                controllers.DocumentacaoController.contato()
-GET     /documentacao/dicionario/curso                                  controllers.DocumentacaoController.curso()
-GET     /documentacao/dicionario/evento                                 controllers.DocumentacaoController.evento()
-GET     /documentacao/dicionario/home                                   controllers.DocumentacaoController.home()
-GET     /documentacao/dicionario/log                                    controllers.DocumentacaoController.log()
-GET     /documentacao/dicionario/marco                                  controllers.DocumentacaoController.marco()
-GET     /documentacao/dicionario/noticia                                controllers.DocumentacaoController.noticia()
-GET     /documentacao/dicionario/publicacao                             controllers.DocumentacaoController.publicacao()
-GET     /documentacao/dicionario/notatecnica                            controllers.DocumentacaoController.notaTecnica()
-GET     /documentacao/dicionario/site                                   controllers.DocumentacaoController.site()
-GET     /documentacao/dicionario/token                                  controllers.DocumentacaoController.token()
-GET     /documentacao/dicionario/trabalho                               controllers.DocumentacaoController.trabalho()
-GET     /documentacao/dicionario/usuario                                controllers.DocumentacaoController.usuario()
-GET     /documentacao/dicionario/video                                  controllers.DocumentacaoController.video()
-
 # Adicionais Usuario telas
 GET     /cadastro                                                       controllers.UsuarioController.telaCadastro()
 GET     /admin/adicionais/usuario/novo/                                 controllers.UsuarioController.telaNovo()
@@ -180,34 +153,6 @@ GET     /livro/pdf/:titulo                                              controll
 POST    /admin/livro                                                    controllers.LivroController.inserir()
 POST	/admin/livro/:id/remover		                                controllers.LivroController.remover(id:Long)
 POST    /admin/livro/editar/:id                                         controllers.LivroController.editar(id:Long)
-
-# Evento Telas
-GET     /admin/evento/novo/                                             controllers.EventoController.telaNovo()
-GET		/admin/evento/detalhe/:id				                        controllers.EventoController.telaDetalhe(id:Long)
-GET     /admin/evento/editar/:id                                        controllers.EventoController.telaEditar(id:Long)
-GET     /admin/evento/lista/todos                                       controllers.EventoController.telaLista(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
-
-# Evento Servicos
-GET     /eventos                                                        controllers.EventoController.buscaTodos()
-GET     /eventos/futuros                                                controllers.EventoController.buscaTodosEventosFuturos()
-GET     /eventos/ultimos                                                controllers.EventoController.ultimosCadastrados()
-POST    /admin/evento                                                   controllers.EventoController.inserir()
-POST	/admin/evento/:id/remover		                                controllers.EventoController.remover(id:Long)
-POST    /admin/evento/editar/:id                                        controllers.EventoController.editar(id:Long)
-
-# Curso Telas
-GET     /admin/curso/novo/                                              controllers.CursoController.telaNovo()
-GET		/admin/curso/detalhe/:id				                        controllers.CursoController.telaDetalhe(id:Long)
-GET     /admin/curso/editar/:id                                         controllers.CursoController.telaEditar(id:Long)
-GET     /admin/curso/lista/todos                                        controllers.CursoController.telaLista(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
-
-# Curso Servicos
-GET     /cursos                                                         controllers.CursoController.buscaTodos()
-GET     /curso/jpg/:titulo                                              controllers.CursoController.jpg(titulo:String)
-POST    /admin/curso                                                    controllers.CursoController.inserir()
-POST	/admin/curso/:id/remover                                        controllers.CursoController.remover(id:Long)
-POST    /admin/curso/editar/:id                                         controllers.CursoController.editar(id:Long)
-POST    /admin/curso/editarImg/:id                                      controllers.CursoController.editarImg(id:Long)
 
 # Video Telas
 GET     /admin/video/novo/                                              controllers.VideoController.telaNovo()

@@ -67,29 +67,6 @@ create table contato (
   constraint pk_contato primary key (id)
 );
 
-create table curso (
-  id                            bigserial not null,
-  nome                          varchar(100) not null,
-  descricao                     varchar(400) not null,
-  data_inicio                   date not null,
-  site                          varchar(300) not null,
-  nome_capa                     varchar(150) not null,
-  constraint pk_curso primary key (id)
-);
-
-create table evento (
-  id                            bigserial not null,
-  nome                          varchar(150) not null,
-  data_inicio                   date not null,
-  data_fim                      date not null,
-  site                          varchar(300) not null,
-  localidade                    varchar(150) not null,
-  instituicao                   varchar(100) not null,
-  data_cadastro                 date not null,
-  data_alteracao                date,
-  constraint pk_evento primary key (id)
-);
-
 create table foto (
   id                            bigserial not null,
   album_id                      bigint not null,
@@ -355,10 +332,6 @@ drop table if exists avaliacao cascade;
 drop table if exists categoria cascade;
 
 drop table if exists contato cascade;
-
-drop table if exists curso cascade;
-
-drop table if exists evento cascade;
 
 drop table if exists foto cascade;
 

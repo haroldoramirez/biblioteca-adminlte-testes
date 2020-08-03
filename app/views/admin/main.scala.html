@@ -49,10 +49,6 @@
                             <a href="@routes.PublicacaoController.telaLista()"><span class="fa fa-file-text"></span> Publicações</a></li>
                         <li @if(request.path.contains("/admin/notatecnica")){ class="active" }>
                             <a href="@routes.NotaTecnicaController.telaLista()"><span class="fa fa-book"></span> Notas Técnicas</a></li>
-                        <li @if(request.path.contains("/admin/evento")){ class="active" }>
-                            <a href="@routes.EventoController.telaLista()"><span class="fa fa-calendar"></span> Eventos</a></li>
-                        <li @if(request.path.contains("/admin/curso")){ class="active" }>
-                            <a href="@routes.CursoController.telaLista()"><span class="fa fa-leaf"></span> Cursos</a></li>
                         <li @if(request.path.contains("/admin/video")){ class="active" }>
                             <a href="@routes.VideoController.telaLista()"><span class="fa fa-video-camera"></span> Vídeos</a></li>
                         <li @if(request.path.contains("/admin/noticia")){ class="active" }>
@@ -107,8 +103,6 @@
                                     class="active" }><a href="@routes.LogController.telaLista()"><span class="fa fa-file"></span> Logs</a></li>
                                 <li @if(request.path.contains("/api")) {
                                 class="active" }><a href="@routes.ApiRDStationController.telaLista()"><span class="fa fa-cloud"></span> API RDStation</a></li>
-                                <li @if(request.path.contains("/doc")) {
-                                    class="active" }><a href="@routes.DocumentacaoController.inicio()"><span class="fa fa-cube"></span> Documentação</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Autenticação</li>
                                 <li><a href="@routes.LoginController.logout"><span class="fa fa-sign-out"></span> Sair</a></li>
