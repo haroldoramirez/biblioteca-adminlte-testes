@@ -96,23 +96,6 @@ create table idioma (
   constraint pk_idioma primary key (id)
 );
 
-create table livro (
-  id                            bigserial not null,
-  titulo                        varchar(150) not null,
-  sub_titulo                    varchar(250) not null,
-  isbn                          varchar(20),
-  editora                       varchar(100) not null,
-  autores                       varchar(250) not null,
-  edicao                        integer,
-  paginas                       integer,
-  ano                           integer,
-  nome_arquivo                  varchar(200) not null,
-  data_cadastro                 date not null,
-  data_alteracao                date,
-  constraint uq_livro_isbn unique (isbn),
-  constraint pk_livro primary key (id)
-);
-
 create table log (
   id                            bigserial not null,
   mensagem                      varchar(500) not null,
@@ -154,27 +137,6 @@ create table nota_tecnica (
   constraint pk_nota_tecnica primary key (id)
 );
 
-create table noticia (
-  id                            bigserial not null,
-  titulo                        varchar(250) not null,
-  resumo                        varchar(400) not null,
-  url                           varchar(400) not null,
-  data_cadastro                 date not null,
-  data_alteracao                date,
-  nome_capa                     varchar(250) not null,
-  constraint pk_noticia primary key (id)
-);
-
-create table oportunidade_rd (
-  id                            bigserial not null,
-  codigo                        varchar(100) not null,
-  nome                          varchar(200) not null,
-  id_campo_custom               varchar(200) not null,
-  valor_campo_custom            varchar(200) not null,
-  data_cadastro                 timestamp not null,
-  constraint pk_oportunidade_rd primary key (id)
-);
-
 create table pais (
   id                            bigserial not null,
   nome                          varchar(200) not null,
@@ -199,16 +161,6 @@ create table publicacao (
   palavra_chave                 varchar(200) not null,
   nome_arquivo                  varchar(400) not null,
   constraint pk_publicacao primary key (id)
-);
-
-create table site (
-  id                            bigserial not null,
-  titulo                        varchar(250) not null,
-  url                           varchar(400) not null,
-  pais_id                       bigint,
-  data_cadastro                 date not null,
-  data_alteracao                date,
-  constraint pk_site primary key (id)
 );
 
 create table token (
@@ -262,18 +214,6 @@ create table usuario (
   constraint pk_usuario primary key (id)
 );
 
-create table video (
-  id                            bigserial not null,
-  titulo                        varchar(250) not null,
-  descricao                     varchar(400) not null,
-  url_imagem                    varchar(400) not null,
-  url                           varchar(400) not null,
-  data_cadastro                 date not null,
-  data_alteracao                date,
-  nome_capa                     varchar(400) not null,
-  constraint pk_video primary key (id)
-);
-
 alter table artigo add constraint fk_artigo_idioma_id foreign key (idioma_id) references idioma (id) on delete restrict on update restrict;
 create index ix_artigo_idioma_id on artigo (idioma_id);
 
@@ -288,9 +228,6 @@ create index ix_nota_tecnica_idioma_id on nota_tecnica (idioma_id);
 
 alter table publicacao add constraint fk_publicacao_idioma_id foreign key (idioma_id) references idioma (id) on delete restrict on update restrict;
 create index ix_publicacao_idioma_id on publicacao (idioma_id);
-
-alter table site add constraint fk_site_pais_id foreign key (pais_id) references pais (id) on delete restrict on update restrict;
-create index ix_site_pais_id on site (pais_id);
 
 alter table token_api add constraint fk_token_api_usuario_id foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
 
@@ -315,9 +252,6 @@ drop index if exists ix_nota_tecnica_idioma_id;
 alter table publicacao drop constraint if exists fk_publicacao_idioma_id;
 drop index if exists ix_publicacao_idioma_id;
 
-alter table site drop constraint if exists fk_site_pais_id;
-drop index if exists ix_site_pais_id;
-
 alter table token_api drop constraint if exists fk_token_api_usuario_id;
 
 alter table trabalho drop constraint if exists fk_trabalho_idioma_id;
@@ -339,23 +273,15 @@ drop table if exists home cascade;
 
 drop table if exists idioma cascade;
 
-drop table if exists livro cascade;
-
 drop table if exists log cascade;
 
 drop table if exists marco cascade;
 
 drop table if exists nota_tecnica cascade;
 
-drop table if exists noticia cascade;
-
-drop table if exists oportunidade_rd cascade;
-
 drop table if exists pais cascade;
 
 drop table if exists publicacao cascade;
-
-drop table if exists site cascade;
 
 drop table if exists token cascade;
 
@@ -364,6 +290,4 @@ drop table if exists token_api cascade;
 drop table if exists trabalho cascade;
 
 drop table if exists usuario cascade;
-
-drop table if exists video cascade;
 

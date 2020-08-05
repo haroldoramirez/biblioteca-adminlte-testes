@@ -35,9 +35,9 @@ GET     /admin/adicionais/idioma/editar/:id                             controll
 GET     /admin/adicionais/idioma/lista/todos                            controllers.IdiomaController.telaLista(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
 
 # Adicionais Idiomas Servicos
-POST    /admin/adicionais/video                                         controllers.IdiomaController.inserir()
-POST	/admin/adicionais/video/:id/remover                             controllers.IdiomaController.remover(id:Long)
-POST    /admin/adicionais/video/editar/:id                              controllers.IdiomaController.editar(id:Long)
+POST    /admin/adicionais/idioma                                         controllers.IdiomaController.inserir()
+POST	/admin/adicionais/idioma/:id/remover                             controllers.IdiomaController.remover(id:Long)
+POST    /admin/adicionais/idioma/editar/:id                              controllers.IdiomaController.editar(id:Long)
 
 # Adicionais Paises
 GET     /admin/adicionais/pais/novo/                                    controllers.PaisController.telaNovo()
@@ -141,33 +141,6 @@ POST	/admin/trabalho/:id/remover		                                controllers.Tr
 POST    /admin/trabalho/editar/:id                                      controllers.TrabalhoController.editar(id:Long)
 POST    /admin/trabalho/editarPdf/:id                                   controllers.TrabalhoController.editarPdf(id:Long)
 
-# Livro Telas
-GET     /admin/livro/novo/                                              controllers.LivroController.telaNovo()
-GET		/admin/livro/detalhe/:id				                        controllers.LivroController.telaDetalhe(id:Long)
-GET     /admin/livro/editar/:id                                         controllers.LivroController.telaEditar(id:Long)
-GET     /admin/livro/lista/todos                                        controllers.LivroController.telaLista()
-
-# Livro Servicos
-GET     /livros                                                         controllers.LivroController.buscaTodos()
-GET     /livro/pdf/:titulo                                              controllers.LivroController.pdf(titulo:String)
-POST    /admin/livro                                                    controllers.LivroController.inserir()
-POST	/admin/livro/:id/remover		                                controllers.LivroController.remover(id:Long)
-POST    /admin/livro/editar/:id                                         controllers.LivroController.editar(id:Long)
-
-# Video Telas
-GET     /admin/video/novo/                                              controllers.VideoController.telaNovo()
-GET		/admin/video/detalhe/:id				                        controllers.VideoController.telaDetalhe(id:Long)
-GET     /admin/video/editar/:id                                         controllers.VideoController.telaEditar(id:Long)
-GET     /admin/video/lista/todos                                        controllers.VideoController.telaLista(p:Int ?= 0, s ?= "titulo", o ?= "asc", f ?= "")
-
-# Video Servicos
-GET     /videos                                                         controllers.VideoController.buscaTodos()
-GET     /video/jpg/:titulo                                              controllers.VideoController.jpg(titulo:String)
-POST    /admin/video                                                    controllers.VideoController.inserir()
-POST	/admin/video/:id/remover                                        controllers.VideoController.remover(id:Long)
-POST    /admin/video/editar/:id                                         controllers.VideoController.editar(id:Long)
-POST    /admin/video/editarImg/:id                                      controllers.VideoController.editarImg(id:Long)
-
 # Publicacoes Telas
 GET     /admin/publicacao/novo/                                         controllers.PublicacaoController.telaNovo(id: Long ?= 0)
 GET		/admin/publicacao/detalhe/:id				                    controllers.PublicacaoController.telaDetalhe(id:Long)
@@ -212,22 +185,6 @@ POST    /admin/notatecnica/editarImg/:id                                 control
 POST    /admin/notatecnica/editarPdf/:id                                 controllers.NotaTecnicaController.editarPdf(id:Long)
 GET     /admin/notatecnica/pdf/:titulo                                   controllers.NotaTecnicaController.pdfAdmin(titulo:String)
 
-# Noticias Telas
-GET     /admin/noticia/novo/                                            controllers.NoticiaController.telaNovo()
-GET		/admin/noticia/detalhe/:id				                        controllers.NoticiaController.telaDetalhe(id:Long)
-GET     /admin/noticia/editar/:id                                       controllers.NoticiaController.telaEditar(id:Long)
-GET     /admin/noticia/lista/todos                                      controllers.NoticiaController.telaLista(p:Int ?= 0, s ?= "titulo", o ?= "asc", f ?= "")
-
-# Noticia Servicos
-GET     /noticias                                                       controllers.NoticiaController.buscaTodos()
-GET     /noticias/ultimas                                               controllers.NoticiaController.ultimasCadastradas()
-GET     /noticia/detalhe/:id                                            controllers.NoticiaController.detalhe(id: Long)
-GET     /noticia/jpg/:titulo                                            controllers.NoticiaController.jpg(titulo:String)
-POST    /admin/noticia                                                  controllers.NoticiaController.inserir()
-POST	/admin/noticia/:id/remover                                      controllers.NoticiaController.remover(id:Long)
-POST    /admin/noticia/editar/:id                                       controllers.NoticiaController.editar(id:Long)
-POST    /admin/noticia/editarImg/:id                                    controllers.NoticiaController.editarImg(id:Long)
-
 # Marcos Telas
 GET     /admin/marco/novo/                                              controllers.MarcoController.telaNovo(id: Long ?= 0)
 GET		/admin/marco/detalhe/:id				                        controllers.MarcoController.telaDetalhe(id:Long)
@@ -246,18 +203,6 @@ POST    /admin/marco/editarImg/:id                                      controll
 POST    /admin/categoria                                                controllers.CategoriaController.inserir()
 POST	/admin/categoria/:id/remover                                    controllers.CategoriaController.remover(id:Long)
 POST    /admin/categoria/editar/:id                                     controllers.CategoriaController.editar(id:Long)
-
-# Site Telas
-GET     /admin/site/novo/                                               controllers.SiteController.telaNovo(id: Long ?= 0)
-GET		/admin/site/detalhe/:id				                            controllers.SiteController.telaDetalhe(id:Long)
-GET     /admin/site/editar/:id                                          controllers.SiteController.telaEditar(id:Long)
-GET     /admin/site/lista/todos                                         controllers.SiteController.telaLista(p:Int ?= 0, s ?= "titulo", o ?= "asc", f ?= "")
-
-# Site Servicos
-GET     /sites                                                          controllers.SiteController.buscaTodos()
-POST    /admin/site                                                     controllers.SiteController.inserir(id: Long ?= 0)
-POST	/admin/site/:id/remover                                         controllers.SiteController.remover(id:Long)
-POST    /admin/site/editar/:id                                          controllers.SiteController.editar(id:Long)
 
 # Album Telas
 GET     /admin/album/novo/                                              controllers.AlbumController.telaNovo()
@@ -287,12 +232,5 @@ POST     /usuario/reset/senha                                           controll
 GET     /reset/:token                                                   controllers.SenhaController.reset(token:String)
 POST    /reset/:token                                                   controllers.SenhaController.runReset(token:String)
 
-# API RDStation
-GET /api/listar/oportunidades                                                       controllers.ApiRDStationController.listarOportunidadesRDStation
-
-GET     /admin/adicionais/rdstation/api/oportunidade/:id/remover                    controllers.ApiRDStationController.remover(id:Long)
-GET		/admin/adicionais/rdstation/api/oportunidade/detalhe/:id				    controllers.ApiRDStationController.telaDetalhe(id:Long)
-GET     /admin/adicionais/rdstation/api/lista/oportunidades                         controllers.ApiRDStationController.telaLista(p:Int ?= 0, s ?= "dataCadastro", o ?= "desc", f ?= "")
-
-# Map static resources from the /public folder to the /assets URL path
+# AngularJS - Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                                                   controllers.Assets.versioned(path="/public", file: Asset)

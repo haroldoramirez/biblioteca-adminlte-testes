@@ -1,0 +1,104 @@
+@usuario() = @{Http.Context.current().args.get("usuario").asInstanceOf[Usuario]}
+<header class="main-header">
+    <nav class="navbar navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand"><img src="@routes.Assets.versioned("images/cibiogasadmin_logobranco.png")" alt="Cibiogas_logo"></a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li @if(request.path.contains("/painel")){ class="active" }>
+                    <a href="@routes.AdminController.painel()"><span class="fa fa-home"></span> Início</a></li>
+                    <li @if(request.path.contains("/admin/trabalho")){ class="active" }>
+                    <a href="@routes.TrabalhoController.telaLista()"><span class="glyphicon glyphicon-education"></span> Trabalhos</a></li>
+                    <li @if(request.path.contains("/admin/artigo")){ class="active" }>
+                    <a href="@routes.ArtigoController.telaLista()"><span class="fa fa-file-text-o"></span> Artigos</a></li>
+                    <li @if(request.path.contains("/admin/publicacao")){ class="active" }>
+                    <a href="@routes.PublicacaoController.telaLista()"><span class="fa fa-file-text"></span> Publicações</a></li>
+                    <li @if(request.path.contains("/admin/notatecnica")){ class="active" }>
+                    <a href="@routes.NotaTecnicaController.telaLista()"><span class="fa fa-book"></span> Notas Técnicas</a></li>
+                    <li @if(request.path.contains("/admin/marco")){ class="active" }>
+                    <a href="@routes.MarcoController.telaLista()"><span class="fa fa-thumb-tack"></span> Marcos Regulatórios</a></li>
+                    <li @if(request.path.contains("/admin/album")){ class="active" }>
+                    <a href="@routes.AlbumController.telaLista()"><span class="fa fa-picture-o"></span> Albuns</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="fa fa-cog" aria-hidden="true"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@routes.Application.index"><span class="fa fa-sign-in"></span> Home</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Adicionais</li>
+                            <li @if(request.path.contains("/idioma")) {
+                            class="active" }><a href="@routes.IdiomaController.telaLista()"><span class="fa fa-language"></span> Idiomas</a></li>
+                            <li @if(request.path.contains("/pais")) {
+                            class="active" }><a href="@routes.PaisController.telaLista()"><span class="fa fa-flag"></span> Paises</a></li>
+                            <li @if(request.path.contains("/categoria")) {
+                            class="active" }><a href="@routes.CategoriaController.telaLista()"><span class="fa fa-bookmark"></span> Categorias</a></li>
+                            <li @if(request.path.contains("/home")) {
+                            class="active" }><a href="@routes.HomeController.telaLista()"><span class="fa fa-file-image-o"></span> Imagens da Home</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li @if(request.path.contains("/contato")) {
+                            class="active" }><a href="@routes.ContatoController.telaLista()"><span class="fa fa-address-book-o"></span> Contatos</a></li>
+                            <li @if(request.path.contains("/avaliacao")) {
+                            class="active" }><a href="@routes.AvaliacaoController.telaLista()"><span class="fa fa-leanpub"></span> Avaliações</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Sistema</li>
+                            @if(usuario().isAdmin) {
+                                <li @if(request.path.contains("/usuario")) {
+                                class="active" }><a href="@routes.UsuarioController.telaLista()"><span class="fa fa-users"></span> Usuários</a></li>
+                            }
+                            <li @if(request.path.contains("/log")) {
+                                class="active" }><a href="@routes.LogController.telaLista()"><span class="fa fa-file"></span> Logs</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Autenticação</li>
+                            <li><a href="@routes.LoginController.logout"><span class="fa fa-sign-out"></span> Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="@routes.Assets.versioned("images/octocat.png")" class="user-image" alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">@usuario.getNome</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="@routes.Assets.versioned("images/octocat.png")" class="img-circle" alt="User Image">
+                                <p @if(usuario.isAdmin) { class="label-danger"} else { class="label-warning" }><strong>@usuario.getEmail</strong></p>
+                                <p>
+                                    <small>Membro desde @usuario.getDataCadastro.format("dd MMMM yyyy")</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="@routes.LoginController.logout" class="btn btn-default btn-flat">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-custom-menu -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>
