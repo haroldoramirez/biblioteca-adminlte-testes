@@ -1,9 +1,20 @@
 @if(!flash.isEmpty) {
-    <section class="container-fluid">
     @for(key <- flash.keySet) {
-        <p class="alert alert-@key text-@key">
-        @flash.get(key)
-        </p>
+        <script type="text/javascript">
+            window.onload = function() {
+                if ("@key" === "success") {
+                    toastr.success("@flash.get(key)");
+                }
+                if ("@key" === "warning") {
+                    toastr.warning("@flash.get(key)");
+                }
+                if ("@key" === "error") {
+                    toastr.error("@flash.get(key)");
+                }
+                if ("@key" === "info") {
+                    toastr.info("@flash.get(key)");
+                }
+            }
+        </script>
     }
-    </section>
 }

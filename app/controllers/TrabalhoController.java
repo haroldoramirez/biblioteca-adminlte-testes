@@ -270,9 +270,8 @@ public class TrabalhoController extends Controller {
 
                 }
 
-                tipoMensagem = "success";
-                mensagem = "Trabalho '" + trabalho.getTitulo() + "' foi cadastrado com sucesso.";
-                return created(views.html.mensagens.trabalho.mensagens.render(mensagem, tipoMensagem));
+                flash("success", "Trabalho cadastrado com sucesso.");
+                return redirect(routes.TrabalhoController.telaLista(0, "titulo", "asc", "", ""));
 
             } catch (Exception e) {
                 Logger.error(e.getMessage());
@@ -344,9 +343,8 @@ public class TrabalhoController extends Controller {
                     trabalho.setDataAlteracao(new Date());
                     trabalho.update();
 
-                    tipoMensagem = "info";
-                    mensagem = "Trabalho '" + trabalho.getTitulo() + "' atualizado com sucesso.";
-                    return ok(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+                    flash("primary", "Atualizado trabalho com título - " + trabalho.getTitulo());
+                    return redirect(routes.TrabalhoController.telaLista(0, "titulo", "asc", "", ""));
                 }
 
                 //Converte os dados do formularios para uma instancia do Objeto
@@ -360,9 +358,8 @@ public class TrabalhoController extends Controller {
                     logController.inserir(sb.toString());
                 }
 
-                tipoMensagem = "info";
-                mensagem = "Trabalho '" + trabalho.getTitulo() + "' atualizado com sucesso.";
-                return ok(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+                flash("primary", "Atualizado trabalho com título - " + trabalho.getTitulo());
+                return redirect(routes.TrabalhoController.telaLista(0, "titulo", "asc", "", ""));
 
             } catch (Exception e) {
                 formData.reject("Erro interno de Sistema. Descrição: " + e);
@@ -409,7 +406,7 @@ public class TrabalhoController extends Controller {
                 if (!isPDF2(file)) {
                     tipoMensagem = "danger";
                     mensagem = "Selecione um arquivo no formato PDF";
-                    return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+                    //return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
                 }
 
                 //necessario para excluir o arquivo antigo
@@ -431,13 +428,12 @@ public class TrabalhoController extends Controller {
                         trabalho.setDataAlteracao(new Date());
                         trabalho.update();
 
-                        tipoMensagem = "info";
-                        mensagem = "Pdf do Trabalho '" + trabalho.getTitulo() + "' foi atualizado com sucesso.";
-                        return ok(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+                        flash("success", "O Arquivo do trabaho" + trabalho.getTitulo() + "foi alterado com sucesso");
+                        return redirect(routes.TrabalhoController.telaLista(0, "titulo", "asc", "", ""));
                     } else {
                         tipoMensagem = "danger";
                         mensagem = "Apenas arquivos em formato PDF é aceito";
-                        return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+                        //return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
                     }
                 }
             } else {
@@ -448,7 +444,7 @@ public class TrabalhoController extends Controller {
             tipoMensagem = "danger";
             mensagem = "Erro interno de Sistema. Descrição: " + e;
             Logger.error(e.toString());
-            return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem, tipoMensagem));
+            //return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem, tipoMensagem));
         }
 
         //Buscar uma forma melhor de fazer este retorno
@@ -512,14 +508,14 @@ public class TrabalhoController extends Controller {
 
             tipoMensagem = "danger";
             mensagem = "Trabalho '" + trabalho.getTitulo() + "' excluído com sucesso.";
-            return ok(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+            //return ok(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
         } catch (Exception e) {
             tipoMensagem = "danger";
             mensagem = "Erro interno de Sistema. Descrição: " + e;
             Logger.error(e.toString());
-            return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
+            //return badRequest(views.html.mensagens.trabalho.mensagens.render(mensagem,tipoMensagem));
         }
-
+        return badRequest();
     }
 
     /**
