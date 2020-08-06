@@ -40,8 +40,8 @@
 @**********************************
 * Helper generating table headers *
 ***********************************@
-@header(key:String, title:String) = {
-    <th rowspan="1" colspan="1" tabindex="0" class="@key.replace(".","_") sorting @if(currentSortBy == key) @{if(currentOrder == "asc") "sorting_asc headercor" else "sorting_desc headercor"}">
+@header(key:String, title:String, largura:String) = {
+    <th style="@largura" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" class="@key.replace(".","_") sorting @if(currentSortBy == key) @{if(currentOrder == "asc") "sorting_asc headercor" else "sorting_desc headercor"}">
         <a href="@link(0, key)">@title</a>
     </th>
 }
@@ -49,31 +49,36 @@
 @views.html.admin.main(Messages("app.title")) {
 <div class="content-wrapper">
     <div class="container-fluid">
-        @views.html.admin.header("Trabalhos")
+        @views.html.admin.header("Trabalhos Científicos")
         @*INICIO - conteudo*@
         <section class="content">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Lista</h3>
+                    <div class="box-tools">
+                        <a type="button" id="btn_novo" href="@routes.TrabalhoController.telaNovo()" class="btn btn-success"><span class="fa fa-plus"></span> Cadastrar</a>
+                    </div>
                 </div>
                 <div class="box-body">
-                    @notificacoes()
+                    @views.html.admin.notificacoes()
                     <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
-                            <div class="col-sm-6">
-                                @form(link(0, "titulo"), 'id -> "filtroForm") {
-                                    <div class="form-group mr-sm-2 mb-2">
-                                        <input type="search" class="form-control" id="searchbox" name="f" value="@currentFilter" placeholder="Filtrar por título...">
+                            @form(link(0, "titulo"), 'id -> "filtroForm") {
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group">
+                                        <input type="search" class="form-control" id="searchbox" name="f" value="@currentFilter" placeholder="Filtrar por título..." maxlength="30">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary" id="searchsubmit"><i class="fa fa-search"></i></button>
+                                            <a type="button" class="btn btn-default" href="@routes.TrabalhoController.telaLista()"><i class="fa fa-refresh"></i> Limpar</a>
+                                        </div>
                                     </div>
-                                    <button type="submit" id="searchsubmit" class="btn btn-primary"><span class="fa fa-search"></span> Filtrar</button>
-                                    <a type="button" href="@routes.TrabalhoController.telaLista()" class="btn btn-default"><span class="fa fa-refresh"></span> Limpar</a>
-                                }
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="example1_filter" class="dataTables_filter">
-                                    <a type="button" id="btn_novo" href="@routes.TrabalhoController.telaNovo()" class="btn btn-success"><span class="fa fa-plus"></span> New</a>
                                 </div>
-                            </div>
+                                <div class="col-sm-6">
+                                    <div id="example1_filter" class="dataTables_filter">
+                                        @caixaSelecao(listForm("autor"), nome = "Filtrar por Autor")
+                                    </div>
+                                </div>
+                            }
                         </div>
                         @*Lista das informacoes*@
                         @if(currentPage.getTotalRowCount == 0) {
@@ -88,104 +93,68 @@
                         } else {
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                    <table id="example1" class="table table-hover table-bordered table-striped dataTable table-responsive" role="grid" aria-describedby="example1_info">
                                         <thead>
-                                            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 297px;">Rendering engine</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 361px;">Browser</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 323px;">Platform(s)</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 257px;">Engine version</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 191px;">CSS grade</th></tr>
+                                            <tr role="row">
+                                                @header("titulo", "Título", "max-width: 361px")
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="max-width: 280px;">Resumo</th>
+                                                @header("idioma", "Idioma", "width: 80px")
+                                                @header("autores", "Autor/Autores", "width: 180px")
+                                                @header("numeroAcesso", "Acessos", "width: 65px")
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 85px;">Fonte</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 1.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 1.5</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 2.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 3.0</td>
-                                            <td>Win 2k+ / OSX.3+</td>
-                                            <td>1.9</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Camino 1.0</td>
-                                            <td>OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Camino 1.5</td>
-                                            <td>OSX.3+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Netscape 7.2</td>
-                                            <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Netscape Browser 8</td>
-                                            <td>Win 98SE+</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Netscape Navigator 9</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr><tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Mozilla 1.0</td>
-                                            <td>Win 95+ / OSX.1+</td>
-                                            <td>1</td>
-                                            <td>A</td>
-                                        </tr>
+                                            @for(trabalho <- currentPage.getList) {
+                                                <tr role="row" class="odd">
+                                                    <td><a href="@routes.TrabalhoController.telaDetalhe(trabalho.getId)">@trabalho.getTitulo</a></td>
+                                                    <td>@trabalho.getResumo</td>
+                                                    <td>@trabalho.getIdioma.getNome</td>
+                                                    <td>@trabalho.getAutores</td>
+                                                    <td>@trabalho.getNumeroAcesso</td>
+                                                    @if(trabalho.getUrl == null || trabalho.getUrl.isEmpty || trabalho.getUrl.equals("https://cibiogas.org")) {
+                                                        <td><a data-placement="left" data-toggle="tooltip" title="Acessar" class="btn btn-default btn-xs" type="button" target="_blank" href="@routes.TrabalhoController.pdfAdmin(trabalho.getNomeArquivo)">Arquivo local <i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                                    } else {
+                                                        <td><a data-placement="left" data-toggle="tooltip" title="Acessar" class="btn btn-success btn-xs" type="button" target="_blank" href="@trabalho.getUrl">Fonte externa <i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                                    }
+                                                </tr>
+                                            }
                                         </tbody>
-                                        <tfoot>
-                                        <tr><th rowspan="1" colspan="1">Rendering engine</th>
-                                            <th rowspan="1" colspan="1">Browser</th>
-                                            <th rowspan="1" colspan="1">Platform(s)</th>
-                                            <th rowspan="1" colspan="1">Engine version</th>
-                                            <th rowspan="1" colspan="1">CSS grade</th></tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
-                            @*Botoes e infos*@
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                                        <ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous">
-                                            <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                        @*INICIO - Linha da paginacao*@
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                                    Visualizando @currentPage.getDisplayXtoYofZ(" até ", " total ")</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="dataTables_paginate paging_simple_numbers pull-right">
+                                    <ul class="pagination">
+                                        @if(currentPage.hasPrev) {
+                                        <li class="paginate_button previous">
+                                            <a href="@link(currentPage.getPageIndex - 1, null)">Anterior</a>
                                         </li>
-                                            <li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li>
-                                            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li>
-                                            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li>
-                                            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li>
-                                            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li>
-                                            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li>
-                                            <li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
-                                        </ul>
-                                    </div>
+                                        } else {
+                                        <li class="paginate_button previous disabled">
+                                            <a>Anterior</a>
+                                        </li>
+                                        }
+                                        @if(currentPage.hasNext) {
+                                        <li class="paginate_button next">
+                                            <a href="@link(currentPage.getPageIndex + 1, null)">Próximo</a>
+                                        </li>
+                                        } else {
+                                        <li class="paginate_button next disabled">
+                                            <a>Próximo</a>
+                                        </li>
+                                        }
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
+                        @*FIM - Linha da paginacao*@
                         }
                     </div>
                 </div>
@@ -195,3 +164,30 @@
     </div>
 </div>
 }
+
+<script type="text/javascript">
+    //executa depois que a pagina carregar
+    window.onload = function() {
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        let table = document.getElementsByTagName('table')[0];
+
+        if (table != undefined) {
+            resizableGrid(table);
+        }
+
+        //checkbox autor via jquery
+        $("#autor").change( function() {
+
+            if ($(this).is(":checked")) {
+                $("#searchbox").attr("placeholder", "Filtrar por autor...");
+            }
+            else {
+                $("#searchbox").attr("placeholder", "Filtrar por título...");
+            }
+
+        });
+
+    };
+</script>
