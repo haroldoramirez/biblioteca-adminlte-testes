@@ -2,10 +2,12 @@
     padding: 9px 15px;
 }
 
+/*deixa em negrito o item selecionado no menu top*/
 .active {
     font-weight: 700;
 }
 
+/*estilo que ajuda a nao quebrar a tabela*/
 .table {
     table-layout:fixed;
 }

@@ -1,4 +1,6 @@
-@(trabalhoForm: play.data.Form[validators.TrabalhoFormData], trabalho: Trabalho, temArquivo: Boolean)
+@(trabalhoForm: play.data.Form[validators.TrabalhoFormData],
+    trabalho: Trabalho,
+    temArquivo: Boolean)
 
 @usuario() = @{
     Http.Context.current().args.get("usuario").asInstanceOf[Usuario]
@@ -10,97 +12,97 @@
 @views.html.admin.main(Messages("app.title")) {
 <div class="content-wrapper">
     <div class="container-fluid">
-        @views.html.admin.header("Trabalhos Científicos")
+        @views.html.admin.header("Trabalhos Científicos", "glyphicon glyphicon-education")
         <section class="content">
             <div class="col-md-8 col-md-offset-2">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Detalhe</h3>
+                        <div class="box-tools">
+                            <div class="btn-group">
+                                <a data-toggle="modal" href="#modalInfo" class="btn btn-default btn-xs" type="button"><span class="fa fa-info-circle"></span></a>
+                                <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opções <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@routes.TrabalhoController.telaEditar(trabalho.getId)">Editar</a></li>
+                                    @if(temArquivo) {
+                                    <li role="separator" class="divider"></li>
+                                    <li><a data-toggle="modal" href="#modalPdf">Atualizar PDF</a></li>
+                                    }
+                                    @if(usuario.isAdmin) {
+                                    <li role="separator" class="divider"></li>
+                                    <li><a data-toggle="modal" href="#modalRemover">Excluir</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="box-body">
 
-                        <div class="btn-group pull-right">
-                            <a data-toggle="modal" href="#modalInfo" class="btn btn-default btn-xs" type="button"><span class="fa fa-info-circle"></span></a>
-                            <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Opções <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="@routes.TrabalhoController.telaEditar(trabalho.getId)">Editar</a></li>
-                                @if(temArquivo) {
-                                <li role="separator" class="divider"></li>
-                                <li><a data-toggle="modal" href="#modalPdf">Atualizar PDF</a></li>
-                                }
-                                @if(usuario.isAdmin) {
-                                <li role="separator" class="divider"></li>
-                                <li><a data-toggle="modal" href="#modalRemover">Excluir</a></li>
-                                }
-                            </ul>
-                        </div>
-
                         @if(trabalhoForm.hasGlobalErrors) {
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <p class="alert alert-danger text-center">@trabalhoForm.globalError.message</p>
+                            <div class="alert alert-danger">
+                                <p><strong><i class="icon fa fa-ban"></i> Ocorreu um erro</strong> - @trabalhoForm.globalError.message</p>
                             </div>
-                        </div>
                         }
 
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Título</label>
-                            <p class="display-block margin-left-027em">@trabalho.getTitulo</p>
-                        </div>
+                        <strong><i class="fa fa-book margin-r-5"></i> Título</strong>
+                        <p class="text-muted">
+                            @trabalho.getTitulo
+                        </p>
                         <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Resumo</label>
-                            <p class="display-block margin-left-027em">@trabalho.getResumo</p>
-                        </div>
+                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Resumo</strong>
+                        <p class="text-muted">
+                            @trabalho.getResumo
+                        </p>
                         <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Idioma</label>
-                            <p class="display-block margin-left-027em">@trabalho.getIdioma.getNome</p>
-                        </div>
+                        <strong><i class="fa fa-language margin-r-5"></i> Idioma</strong>
+                        <p class="text-muted">
+                            @trabalho.getIdioma.getNome
+                        </p>
                         <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Autor/Autores</label>
-                            <p class="display-block margin-left-027em">@trabalho.getAutores</p>
-                        </div>
+                        <strong><i class="fa fa-users margin-r-5"></i> Autor/Autores</strong>
+                        <p class="text-muted">
+                            @trabalho.getAutores
+                        </p>
                         @if(trabalho.getPalavraChave != null) {
-                        <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Palavras Chave</label>
-                            <p class="display-block margin-left-027em">@trabalho.getPalavraChave</p>
-                        </div>
+                            <hr>
+                            <strong><i class="fa fa-key margin-r-5"></i> Palavras chave</strong>
+                            <p class="text-muted">
+                                @trabalho.getPalavraChave
+                            </p>
                         }
                         @if(trabalho.getNomeArquivo != null && trabalho.getNomeArquivo != "arquivo.pdf" && trabalho.getNomeArquivo != "") {
-                        <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Arquivo</label>
-                            <p class="display-block margin-left-027em">@trabalho.getNomeArquivo -> <a target="_blank" href="@routes.TrabalhoController.pdfAdmin(trabalho.getNomeArquivo)">Visualizar</a></p>
-                        </div>
+                            <hr>
+                            <strong><i class="fa fa-file margin-r-5"></i> Arquivo</strong>
+                            <p class="text-muted">
+                                @trabalho.getNomeArquivo -> <a target="_blank" href="@routes.TrabalhoController.pdfAdmin(trabalho.getNomeArquivo)">Visualizar</a>
+                            </p>
                         }
                         @if(trabalho.getUrl != null && trabalho.getUrl != "") {
-                        <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">URL</label>
-                            <p class="display-block margin-left-027em">@trabalho.getUrl -> <a target="_blank" href="@trabalho.getUrl">Visualizar</a></p>
-                        </div>
+                            <hr>
+                            <strong><i class="fa fa-external-link margin-r-5"></i> Endereço externo/fonte (URL)</strong>
+                            <p class="text-muted">
+                                @trabalho.getUrl -> <a target="_blank" href="@trabalho.getUrl">Visualizar</a>
+                            </p>
                         }
+
                         <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Número de Acessos</label>
-                            <p class="display-block margin-left-027em">@trabalho.getNumeroAcesso</p>
-                        </div>
+                        <strong><i class="fa fa-download margin-r-5"></i> Número de acessos</strong>
+                        <p class="text-muted">
+                            @trabalho.getNumeroAcesso
+                        </p>
                         <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Data/Hora de Cadastro</label>
-                            <p type="date" class="display-block margin-left-027em">@trabalho.getDataCadastro.format("dd MMMM yyyy")</p>
-                        </div>
+                        <strong><i class="fa fa-calendar margin-r-5"></i> Data/Hora de cadastro</strong>
+                        <p class="text-muted">
+                            @trabalho.getDataCadastro.format("dd/MM/yyyy")
+                        </p>
                         @if(trabalho.getDataAlteracao != null){
-                        <hr>
-                        <div class="item-form width-600 margin-bottom-15">
-                            <label class="display-block strong">Data/Hora de Alteração</label>
-                            <p class="display-block margin-left-027em">@trabalho.getDataAlteracao.format("dd MMMM yyyy")</p>
-                        </div>
+                            <hr>
+                            <strong><i class="fa fa-refresh margin-r-5"></i> Data/Hora de alteração</strong>
+                            <p class="text-muted">
+                                @trabalho.getDataAlteracao.format("dd/MM/yyyy")
+                            </p>
                         }
 
                     </div>

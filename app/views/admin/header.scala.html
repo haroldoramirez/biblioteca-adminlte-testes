@@ -1,9 +1,9 @@
-@(titulo: String)
+@(titulo: String, icone: String)
 
 @*INICIO - conteudo header*@
 <section class="content-header">
     <h1>
-        @titulo
+        <i class="@icone"></i> @titulo
     </h1>
     <ol class="breadcrumb">
         <li><a href="@routes.AdminController.painel()"><i class="fa fa-home"></i> Início</a></li>

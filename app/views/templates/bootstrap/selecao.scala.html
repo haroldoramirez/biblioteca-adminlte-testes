@@ -1,7 +1,7 @@
 @(field: Field, label: String = "", optionMap: Map[String, Boolean], isMultiple: Boolean)
 
 <div class="form-group @if(field.hasErrors) {has-error}">
-    <label for="@field.id" class="col-md-2 control-label">@label <abbr title="obrigatório">*</abbr></label>
+    <label for="@field.id" class="col-md-3 control-label">@label <abbr title="obrigatório">*</abbr></label>
     <div class="col-md-3">
         <select
             class="form-control"
